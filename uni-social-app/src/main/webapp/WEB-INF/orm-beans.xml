@@ -6,4 +6,26 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<bean id="mySQLDS" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306" />
+		<property name="username" value="unisocialdb" />
+		<property name="password" value="unisocialdb" />
+	</bean>
+
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="mySQLDS" />
+		<!--property name="mappingResources">
+			<list>
+				<value>com/unisocial/app/business/entity/map/me.hbm.xml</value>
+			</list>
+		</property-->
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+      		</value>
+		</property>
+	</bean>
 </beans>
